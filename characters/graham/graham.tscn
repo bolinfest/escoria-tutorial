@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_player.gd" type="Script" id=1]
 [ext_resource path="res://characters/graham/spritesheet-walk.png" type="Texture" id=2]
@@ -52,20 +52,40 @@ script = ExtResource( 6 )
 animation = "back"
 mirrored = false
 
+[sub_resource type="Resource" id=45]
+script = ExtResource( 6 )
+animation = "backright"
+mirrored = false
+
 [sub_resource type="Resource" id=29]
 script = ExtResource( 6 )
 animation = "left"
 mirrored = true
+
+[sub_resource type="Resource" id=52]
+script = ExtResource( 6 )
+animation = ""
+mirrored = false
 
 [sub_resource type="Resource" id=40]
 script = ExtResource( 6 )
 animation = "front"
 mirrored = false
 
+[sub_resource type="Resource" id=51]
+script = ExtResource( 6 )
+animation = "frontleft"
+mirrored = true
+
 [sub_resource type="Resource" id=23]
 script = ExtResource( 6 )
 animation = "left"
 mirrored = false
+
+[sub_resource type="Resource" id=46]
+script = ExtResource( 6 )
+animation = "backright"
+mirrored = true
 
 [sub_resource type="Resource" id=20]
 script = ExtResource( 6 )
@@ -110,7 +130,7 @@ mirrored = false
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
 dir_angles = [ SubResource( 6 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ]
-directions = [ SubResource( 39 ), null, SubResource( 29 ), null, SubResource( 40 ), null, SubResource( 23 ), null ]
+directions = [ SubResource( 39 ), SubResource( 45 ), SubResource( 29 ), SubResource( 52 ), SubResource( 40 ), SubResource( 51 ), SubResource( 23 ), SubResource( 46 ) ]
 idles = [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ]
 speaks = [  ]
 
@@ -199,6 +219,46 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 345, 0, 115, 280 )
 
+[sub_resource type="AtlasTexture" id=41]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 560, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 115, 560, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 230, 560, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 345, 560, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 280, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 115, 280, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 230, 280, 115, 280 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 345, 280, 115, 280 )
+
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
@@ -240,6 +300,16 @@ animations = [ {
 "loop": true,
 "name": "idlefront",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
+"loop": true,
+"name": "backright",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
+"loop": true,
+"name": "frontleft",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=30]
@@ -256,7 +326,7 @@ animations = SubResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-animation = "front"
+animation = "idlefront"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
