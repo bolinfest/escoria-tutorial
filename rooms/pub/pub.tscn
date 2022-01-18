@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_background.gd" type="Script" id=1]
-[ext_resource path="res://characters/graham/graham.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_room.gd" type="Script" id=3]
+[ext_resource path="res://addons/escoria-core/game/core-scripts/esc_room.gd" type="Script" id=2]
+[ext_resource path="res://characters/graham/graham.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/pub_bg.png" type="Texture" id=4]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_location.gd" type="Script" id=5]
 [ext_resource path="res://addons/escoria-core/game/core-scripts/esc_terrain.gd" type="Script" id=6]
@@ -11,10 +11,10 @@
 outlines = [ PoolVector2Array( 3000, 730, 3234, 752, 3282, 950, 674, 950, 900, 862, 1556, 714, 1656, 706, 2722, 848, 2848, 782, 2848, 782, 2848, 782 ) ]
 
 [node name="ESCRoom" type="Node2D"]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 global_id = "pub"
 esc_script = "res://rooms/pub/pub.esc"
-player_scene = ExtResource( 2 )
+player_scene = ExtResource( 3 )
 camera_limits = [ Rect2( 0, 0, 3976, 956 ) ]
 
 [node name="ESCBackground" type="TextureRect" parent="."]

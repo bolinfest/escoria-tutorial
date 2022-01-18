@@ -6,9 +6,9 @@ class_name ESCTerrain, "res://addons/escoria-core/design/esc_terrain.svg"
 
 # Visualize scales or the lightmap for debugging purposes
 enum DebugMode {
-	NONE
-	SCALES
-	LIGHTMAP
+  NONE
+  SCALES
+  LIGHTMAP
 }
 
 
@@ -39,7 +39,7 @@ export(Color) var lightmap_modulate = Color(1, 1, 1, 1)
 
 # Currently selected debug visualize mode
 export(int, "None", "Scales", "Lightmap") var debug_mode = DebugMode.NONE \
-		setget _set_debug_mode
+    setget _set_debug_mode
 
 
 # The currently activ navigation polygon
@@ -59,25 +59,25 @@ var _texture_in_update = false
 # Set a reference to the active navigation polygon, register to Escoria
 # and update the texture
 func _ready():
-	var navigation_enabled_found = false
-	for n in get_children():
-		if n is NavigationPolygonInstance:
-			if n.enabled:
-				if navigation_enabled_found:
-					escoria.logger.report_errors(
-						"ESCTerrain:_ready()", 
-						[
-							"Multiple NavigationPolygonInstances enabled " + \
-							"at the same time."
-						]
-					)
-				navigation_enabled_found = true
-				current_active_navigation_instance = n
-	
-	
-	if !Engine.is_editor_hint():
-		escoria.room_terrain = self
-	_update_texture()
+  var navigation_enabled_found = false
+  for n in get_children():
+    if n is NavigationPolygonInstance:
+      if n.enabled:
+        if navigation_enabled_found:
+          escoria.logger.report_errors(
+            "ESCTerrain:_ready()", 
+            [
+              "Multiple NavigationPolygonInstances enabled " + \
+              "at the same time."
+            ]
+          )
+        navigation_enabled_found = true
+        current_active_navigation_instance = n
+  
+  
+  if !Engine.is_editor_hint():
+    escoria.room_terrain = self
+  _update_texture()
 
 
 # Return the Color of the lightmap pixel for the specified position
@@ -87,10 +87,10 @@ func _ready():
 # - pos: Position to calculate lightmap for
 # **Returns** The color of the given point
 func get_light(pos: Vector2) -> Color:
-	if not lightmap or lightmap.get_data().is_empty():
-		return Color(1, 1, 1, 1)
-	var c = _get_color(_lightmap_data, pos)
-	return _get_color(_lightmap_data, pos) * lightmap_modulate
+  if not lightmap or lightmap.get_data().is_empty():
+    return Color(1, 1, 1, 1)
+  var c = _get_color(_lightmap_data, pos)
+  return _get_color(_lightmap_data, pos) * lightmap_modulate
 
 
 # Calculate the scale inside the scale range for a given scale factor
@@ -100,8 +100,8 @@ func get_light(pos: Vector2) -> Color:
 # - factor: The factor for the scaling according to the scale map
 # **Returns** The scaling
 func get_scale_range(factor: float) -> Vector2:
-	factor = scale_min + (scale_max - scale_min) * factor
-	return Vector2(factor, factor)
+  factor = scale_min + (scale_max - scale_min) * factor
+  return Vector2(factor, factor)
 
 
 # Get the terrain scale factor for a given position
@@ -111,17 +111,17 @@ func get_scale_range(factor: float) -> Vector2:
 # - pos: The position to calculate for
 # **Returns** The scale factor for the given position
 func get_terrain(pos: Vector2) -> float:
-	if scales == null || scales.get_data().is_empty():
-		return 1.0
-	return _get_color(scales.get_data(), pos).v
+  if scales == null || scales.get_data().is_empty():
+    return 1.0
+  return _get_color(scales.get_data(), pos).v
 
 
 # Small helper to get the color of an image at a position
 func _get_color(image: Image, pos: Vector2) -> Color:
-	image.lock()
-	var color=image.get_pixel(pos.x, pos.y)
-	image.unlock()
-	return color
+  image.lock()
+  var color=image.get_pixel(pos.x, pos.y)
+  image.unlock()
+  return color
 
 
 # Set the bitmap scaling
@@ -130,8 +130,8 @@ func _get_color(image: Image, pos: Vector2) -> Color:
 #
 # - p_scale: Scale to set
 func _set_bm_scale(p_scale: Vector2):
-	bitmaps_scale = p_scale
-	_update_texture()
+  bitmaps_scale = p_scale
+  _update_texture()
 
 
 # Set the lightmap texture
@@ -140,19 +140,19 @@ func _set_bm_scale(p_scale: Vector2):
 #
 # - p_lightmap: Lightmap texture to set
 func _set_lightmap(p_lightmap: Texture):
-	var need_init = (lightmap != p_lightmap) or (lightmap and not _lightmap_data)
+  var need_init = (lightmap != p_lightmap) or (lightmap and not _lightmap_data)
 
-	lightmap = p_lightmap
+  lightmap = p_lightmap
 
-	# It's bad enough a new copy is created when reading a pixel, we don't
-	# also need to get the data for every read to make yet another copy
-	if need_init:
-		if _lightmap_data:
-			_lightmap_data.unlock()
-		_lightmap_data = lightmap.get_data()
-		_lightmap_data.lock()
+  # It's bad enough a new copy is created when reading a pixel, we don't
+  # also need to get the data for every read to make yet another copy
+  if need_init:
+    if _lightmap_data:
+      _lightmap_data.unlock()
+    _lightmap_data = lightmap.get_data()
+    _lightmap_data.lock()
 
-	_update_texture()
+  _update_texture()
 
 
 # Set the scales texture
@@ -161,8 +161,8 @@ func _set_lightmap(p_lightmap: Texture):
 #
 # - p_scales: Scale texture to set
 func _set_scales(p_scales: Texture):
-	scales = p_scales
-	_update_texture()
+  scales = p_scales
+  _update_texture()
 
 
 # Set the debug mode
@@ -171,59 +171,59 @@ func _set_scales(p_scales: Texture):
 #
 # - p_mode: Debug mode to set
 func _set_debug_mode(p_mode: int):
-	debug_mode = p_mode
-	_update_texture()
+  debug_mode = p_mode
+  _update_texture()
 
 
 # Update the debug texture, if it is dirty
 func _update_texture():
-	if _texture_in_update:
-		return
-	_texture_in_update = true
-	call_deferred("_do_update_texture")
+  if _texture_in_update:
+    return
+  _texture_in_update = true
+  call_deferred("_do_update_texture")
 
 
 # Update the texture and optionally set the debug texture
 func _do_update_texture():
-	_texture_in_update = false
-	if !is_inside_tree() or !Engine.is_editor_hint():
-		return
+  _texture_in_update = false
+  if !is_inside_tree() or !Engine.is_editor_hint():
+    return
 
-	if debug_mode == DebugMode.NONE:
-		update()
-		return
+  if debug_mode == DebugMode.NONE:
+    update()
+    return
 
-	_texture = ImageTexture.new()
-	if debug_mode == DebugMode.SCALES:
-		if scales != null:
-			_texture = scales
-	elif debug_mode == DebugMode.LIGHTMAP:
-		if lightmap != null:
-			_texture = lightmap
+  _texture = ImageTexture.new()
+  if debug_mode == DebugMode.SCALES:
+    if scales != null:
+      _texture = scales
+  elif debug_mode == DebugMode.LIGHTMAP:
+    if lightmap != null:
+      _texture = lightmap
 
-	update()
+  update()
 
 
 # Draw debugging visualizations
 func _draw():
-	if _texture == null or \
-			not Engine.is_editor_hint() or \
-			debug_mode == DebugMode.NONE:
-		if current_active_navigation_instance:
-			current_active_navigation_instance.visible = true
-		return
-	
-	var scale_vect = bitmaps_scale
+  if _texture == null or \
+      not Engine.is_editor_hint() or \
+      debug_mode == DebugMode.NONE:
+    if current_active_navigation_instance:
+      current_active_navigation_instance.visible = true
+    return
+  
+  var scale_vect = bitmaps_scale
 
-	if current_active_navigation_instance:
-		current_active_navigation_instance.visible = false
+  if current_active_navigation_instance:
+    current_active_navigation_instance.visible = false
 
-	var src = Rect2(0, 0, _texture.get_width(), _texture.get_height())
-	var dst = Rect2(
-		0, 
-		0, 
-		_texture.get_width() * scale_vect.x, 
-		_texture.get_height() * scale_vect.y
-	)
+  var src = Rect2(0, 0, _texture.get_width(), _texture.get_height())
+  var dst = Rect2(
+    0, 
+    0, 
+    _texture.get_width() * scale_vect.x, 
+    _texture.get_height() * scale_vect.y
+  )
 
-	draw_texture_rect_region(_texture, dst, src)
+  draw_texture_rect_region(_texture, dst, src)

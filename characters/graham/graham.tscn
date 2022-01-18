@@ -322,12 +322,15 @@ script = ExtResource( 1 )
 global_id = "graham"
 is_movable = true
 dialog_color = Color( 1, 1, 1, 1 )
+speed = 150
 animations = SubResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -2, -132 )
 frames = SubResource( 5 )
 animation = "idlefront"
+speed_scale = 1.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2, 4 )
+position = Vector2( -1, -121 )
 shape = SubResource( 30 )

@@ -703,7 +703,7 @@ main/settings_path="user://"
 debug/terminate_on_warnings=false
 debug/terminate_on_errors=true
 debug/development_lang="en"
-debug/log_level="ERROR"
+debug/log_level="DEBUG"
 ui/tooltip_follows_mouse=true
 ui/game_scene="res://addons/escoria-ui-simplemouse/game.tscn"
 ui/items_autoregister_path="res://items"
@@ -718,7 +718,7 @@ sound/speech_folder="res://speech"
 sound/speech_extension="ogg"
 platform/skip_cache=false
 platform/skip_cache.mobile=true
-debug/enable_room_selector=false
+debug/enable_room_selector=true
 debug/room_selector_room_dir=""
 ui/default_dialog_type="floating"
 ui/inventory_item_size=Vector2( 72, 72 )
@@ -736,3 +736,4 @@ dialog_simple/max_time_to_disappear=1.0
 [global]
 
 escoria=false
+logging=false

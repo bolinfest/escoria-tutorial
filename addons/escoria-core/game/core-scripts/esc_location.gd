@@ -26,16 +26,16 @@ export(int) var interaction_direction
 #
 # p_classname: String class to compare against
 func is_class(p_classname: String) -> bool:
-	return p_classname == "ESCLocation"
+  return p_classname == "ESCLocation"
 
 
 # Ready function
 func _ready():
-	if not self.global_id.empty():
-		escoria.object_manager.register_object(
-			ESCObject.new(
-				self.global_id,
-				self
-			),
-			true
-		)
+  if not self.global_id.empty():
+    escoria.object_manager.register_object(
+      ESCObject.new(
+        self.global_id,
+        self
+      ),
+      true
+    )
